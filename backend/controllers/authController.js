@@ -4,18 +4,27 @@ import jwt from "jsonwebtoken"
 
 export const registerUser = async (req,res) => {
     try {
-        const existinguser = await Users.findOne({email:req.body.email})
+        console.log("called");
+        
+        const {name , email , password} = req.body
 
-        if(existinguser) {return res.json({message:"User Already Registered"})}
+        if(!name || !email || !password){return res.status(400).json({message:"Name,Email and Password are required"})}
+        const existinguser = await Users.findOne({email:email})
 
-        const hashedPassword = await bcrypt.hash(req.body.password,10)
+        if(existinguser) {return res.status(409).json({message:"User Already Registered"})}
+
+        const hashedPassword = await bcrypt.hash(password,10)
 
         const user = await Users.create({...req.body,password:hashedPassword})
+
+        console.log("Database:", Users.db.name);
+console.log("Collection:", Users.collection.name);
+console.log("Created ID:", user._id);
 
         res.json({message:"User Successfully Registered",data:user})
     } catch (error) {
         console.log(error);
-        res.json({message:"Internal Server Error"})
+        res.status(500).json({message:"Internal Server Error"})
     }
 }
 
