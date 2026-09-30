@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken"
 
 export const registerUser = async (req,res) => {
     try {
-        console.log("called");
         
         const {name , email , password} = req.body
 
@@ -26,8 +25,7 @@ export const registerUser = async (req,res) => {
 
 export const loginUser = async (req,res) =>{
     try {
-        console.log(req.body);
-        
+    
         if(!req.body.email || !req.body.password){
             res.status(400).json({message:"Email and Password are required"})
         }
@@ -63,7 +61,7 @@ export const getCurrentUser = async (req,res) => {
     }
 }
 
-export const logoutUser = async() => {
+export const logoutUser = async(req,res) => {
     try {
         res.clearCookie("token",{
             httpOnly:true,
