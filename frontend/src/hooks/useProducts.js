@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getproducts } from "../api/productApi"
+import { getproducts, getproductsById } from "../api/productApi"
 
 export const useProducts = ({
     search = "",
@@ -25,5 +25,13 @@ export const useProducts = ({
             limit,
             sort
         })
+    })
+}
+
+export const useProduct = (id) => {
+    return useQuery({
+        queryKey:["product",id],
+        queryFn:() => getproductsById(id),
+        enabled:!!id
     })
 }

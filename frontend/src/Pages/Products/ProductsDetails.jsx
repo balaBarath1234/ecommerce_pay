@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useProduct } from '../../hooks/useProduct';
+import { useProduct } from '../../hooks/useProducts';
 import { Alert, Box, Button, CircularProgress, Container, Typography } from '@mui/material';
 
 const ProductsDetails = () => {

@@ -6,9 +6,9 @@ import CommonForm from '../../components/CommonForm';
 const Register = () => {
 
     const formArray = [
-        {name:"Name",type:"text"},
-        {name:"Email",type:"email"},
-        {name:"Password",type:"password"}
+        {name:"name",label:"Name",type:"text"},
+        {name:"email",label:"Email",type:"email"},
+        {name:"Password",label:"Password",type:"password"}
     ]
     return (
         <>
